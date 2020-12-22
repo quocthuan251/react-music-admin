@@ -1,6 +1,5 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
-import { Spin } from 'antd';
 import './LayoutStyle.css';
 import {
 	AppstoreOutlined,
@@ -12,6 +11,8 @@ import {
 	UploadOutlined,
 	VideoCameraOutlined,
 } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+
 const { Header, Content, Footer, Sider } = Layout;
 
 class MainLayout extends React.Component {
@@ -40,31 +41,38 @@ class MainLayout extends React.Component {
 					<Menu
 						theme="dark"
 						mode="inline"
-						defaultSelectedKeys={['4']}
+						defaultSelectedKeys={['1']}
 					>
-						<Menu.Item key="1" icon={<UserOutlined />}>
-							nav 1
+						<div className="layout-logo-admin"></div>
+						<Menu.Item key="1" icon={<BarChartOutlined />}>
+							<Link to="/">Dash board</Link>
 						</Menu.Item>
 						<Menu.Item key="2" icon={<VideoCameraOutlined />}>
-							nav 2
+							<Link to="/admin/song-management">
+								Quản lý bài hát
+							</Link>
 						</Menu.Item>
-						<Menu.Item key="3" icon={<UploadOutlined />}>
-							nav 3
+						<Menu.Item key="3" icon={<TeamOutlined />}>
+							<Link to="/admin/singer-management">
+								Quản lý ca sỹ
+							</Link>
 						</Menu.Item>
-						<Menu.Item key="4" icon={<BarChartOutlined />}>
-							nav 4
+						<Menu.Item key="4" icon={<CloudOutlined />}>
+							<Link to="/admin/">Quản lý album</Link>
 						</Menu.Item>
-						<Menu.Item key="5" icon={<CloudOutlined />}>
-							nav 5
+						<Menu.Item key="5" icon={<UserOutlined />}>
+							<Link to="/admin/user-management">
+								Quản lý user
+							</Link>
 						</Menu.Item>
 						<Menu.Item key="6" icon={<AppstoreOutlined />}>
-							nav 6
+							<Link to="/admin/">Quản lý bài viết</Link>
 						</Menu.Item>
-						<Menu.Item key="7" icon={<TeamOutlined />}>
-							nav 7
+						<Menu.Item key="7" icon={<UploadOutlined />}>
+							<Link to="/admin/">Quản lý tài nguyên</Link>
 						</Menu.Item>
 						<Menu.Item key="8" icon={<ShopOutlined />}>
-							nav 8
+							<Link to="/admin/log-action">Log action</Link>
 						</Menu.Item>
 					</Menu>
 				</Sider>
@@ -84,7 +92,7 @@ class MainLayout extends React.Component {
 						</div>
 					</Content>
 					<Footer style={{ textAlign: 'center' }}>
-						Ant Design ©2018 Created by Ant UED
+						Trang quản trị web MusicCloud - Design by SharkDev
 					</Footer>
 				</Layout>
 			</Layout>
