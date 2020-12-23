@@ -60,7 +60,7 @@ for (let i = 0; i < 100; i++) {
 		name: `Thuận ${i}`,
 	});
 }
-class UserManagement extends React.Component {
+class SingerManagement extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -82,4 +82,4 @@ class UserManagement extends React.Component {
 		);
 	}
 }
-export default UserManagement;
+export default SingerManagement;

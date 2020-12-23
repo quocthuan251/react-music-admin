@@ -75,6 +75,48 @@ const data = [
 		address: 'Select * from "songs"',
 		tags: ['Select', 'Update'],
 	},
+	{
+		key: '4',
+		name: 'Thuận',
+		age: '2020/12/12 10:15:35',
+		address: 'Select * from "songs"',
+		tags: ['Select', 'Update'],
+	},
+	{
+		key: '5',
+		name: 'Thuận',
+		age: '2020/12/12 10:15:35',
+		address: 'Select * from "songs"',
+		tags: ['Select', 'Update'],
+	},
+	{
+		key: '6',
+		name: 'Thuận',
+		age: '2020/12/12 10:15:35',
+		address: 'Select * from "songs"',
+		tags: ['Select', 'Update'],
+	},
+	{
+		key: '7',
+		name: 'Thuận',
+		age: '2020/12/12 10:15:35',
+		address: 'Select * from "songs"',
+		tags: ['Select', 'Update'],
+	},
+	{
+		key: '8',
+		name: 'Thuận',
+		age: '2020/12/12 10:15:35',
+		address: 'Select * from "songs"',
+		tags: ['Select', 'Update'],
+	},
+	{
+		key: '9',
+		name: 'Thuận',
+		age: '2020/12/12 10:15:35',
+		address: 'Select * from "songs"',
+		tags: ['Select', 'Update'],
+	},
 ];
 
 class LogAction extends React.Component {
@@ -106,6 +148,7 @@ class LogAction extends React.Component {
 							position: ['bottomCenter'],
 						}}
 						dataSource={data}
+						scroll={{ y: 340 }}
 					/>
 				</div>
 			</div>
