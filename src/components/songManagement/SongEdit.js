@@ -1,13 +1,13 @@
 import React from 'react';
-
-import { Form, Input, InputNumber, Button } from 'antd';
+import axios from 'axios';
+import { Form, Input, Switch, Button } from 'antd';
 const layout = {
 	labelCol: {
-		span: 8,
+		span: 4,
 	},
-	wrapperCol: {
-		span: 16,
-	},
+	// wrapperCol: {
+	// 	span: 16,
+	// },
 };
 const validateMessages = {
 	required: '${label} is required!',
@@ -23,18 +23,31 @@ const validateMessages = {
 class SongEdit extends React.Component {
 	constructor(props) {
 		super(props);
-
-		// We declare the state as shown below
-
 		this.state = {
-			x: 'This is x from state',
-			y: 'This is y from state',
+			songData: {},
 		};
 	}
 	onFinish = (values) => {
 		console.log(values);
 	};
+	componentDidMount() {
+		console.log(this.props.router.match.params.songId);
+		// const songId = this.props.router.match.params.songId;
+		const songId = 'IWZA08C9';
+		this.getDataSong(songId);
+	}
+	getDataSong = async (songId) => {
+		await axios
+			.get(`https://demo7080721.mockable.io/get-song-detail/${songId}`)
+			.then(({ data: songData }) => {
+				console.log('song', songData);
 
+				this.setState({ songData });
+			});
+	};
+	test = () => {
+		console.log(this.state.songData);
+	};
 	render() {
 		return (
 			<div>
@@ -47,6 +60,7 @@ class SongEdit extends React.Component {
 				>
 					Sửa thông tin bài hát
 				</div>
+				<button onClick={this.test}></button>
 				<Form
 					{...layout}
 					name="nest-messages"
@@ -54,8 +68,8 @@ class SongEdit extends React.Component {
 					validateMessages={validateMessages}
 				>
 					<Form.Item
-						name={['user', 'name']}
-						label="Name"
+						name={['song', 'title']}
+						label="Tên bài hát"
 						rules={[
 							{
 								required: true,
@@ -65,41 +79,31 @@ class SongEdit extends React.Component {
 						<Input />
 					</Form.Item>
 					<Form.Item
-						name={['user', 'email']}
-						label="Email"
-						rules={[
-							{
-								type: 'email',
-							},
-						]}
+						name={['song', 'download_premit']}
+						label="Cho phép download"
+						valuePropName="checked"
+						style={{ textAlign: 'left' }}
 					>
+						<Switch defaultChecked />
+					</Form.Item>
+					<Form.Item name={['song', 'albumid']} label="Ca sỹ">
+						<Input />
+					</Form.Item>
+					<Form.Item name={['song', 'albumid']} label="Thuộc ablum">
+						<Input />
+					</Form.Item>
+					<Form.Item name={['song', 'imageid']} label="Ảnh đại diện">
 						<Input />
 					</Form.Item>
 					<Form.Item
-						name={['user', 'age']}
-						label="Age"
-						rules={[
-							{
-								type: 'number',
-								min: 0,
-								max: 99,
-							},
-						]}
-					>
-						<InputNumber />
-					</Form.Item>
-					<Form.Item name={['user', 'website']} label="Website">
-						<Input />
-					</Form.Item>
-					<Form.Item
-						name={['user', 'introduction']}
-						label="Introduction"
+						name={['song', 'share_links']}
+						label="Tải lên bài hát"
 					>
 						<Input.TextArea />
 					</Form.Item>
 					<Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
 						<Button type="primary" htmlType="submit">
-							Submit
+							Hoàn thành
 						</Button>
 					</Form.Item>
 				</Form>

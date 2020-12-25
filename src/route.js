@@ -38,7 +38,7 @@ const route = [
 		main: (props) => <SongManagementPage router={props} />,
 	},
 	{
-		path: '/admin/song-management/editSong/:id',
+		path: '/admin/song-management/editSong/:songId',
 		exact: true,
 		auth: false,
 		layout: MainLayout,

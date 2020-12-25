@@ -5,87 +5,7 @@ import { FileSearchOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { getListSong } from './actions';
 import { Link } from 'react-router-dom';
-const columns = [
-	{
-		title: 'Stt',
-		dataIndex: 'id',
-		width: 50,
-		render: (row) => <div>{row.index}</div>,
-	},
-	{
-		title: 'Image',
-		dataIndex: 'image',
-		width: 100,
-		render: (avatar) => <Image src={avatar} />,
-	},
-	{
-		title: 'Tên bài hát',
-		dataIndex: 'title',
-		width: 180,
-	},
-	{
-		title: 'Thể loại',
-		dataIndex: 'genre',
-		width: 120,
-	},
-	{
-		title: 'album',
-		dataIndex: 'album_id',
-		width: 130,
-	},
-	{
-		title: 'Ca sỹ',
-		dataIndex: 'artist_id',
-		width: 130,
-	},
-	{
-		title: 'Download',
-		dataIndex: 'download_permit',
-		width: 100,
-		render: (tags) => (
-			<span>
-				{tags ? (
-					<Tag color={'green'}>{'true'}</Tag>
-				) : (
-					<Tag color={'volcano'}>{'false'}</Tag>
-				)}
-			</span>
-		),
-	},
-	{
-		title: 'Actions',
-		dataIndex: 'id',
-		width: 130,
-		render: (id) => (
-			<div>
-				<Button
-					type="primary"
-					size="small"
-					onClick={() => {
-						redirectEditPage();
-					}}
-				>
-					<Link to={`/admin/song-management/editSong/${id}`}>
-						sửa
-					</Link>
-				</Button>
-				<Button type="primary" danger size="small">
-					xóa
-				</Button>
-				<Tooltip title="xem thêm">
-					<Button
-						sharp="cicrle"
-						icon={<FileSearchOutlined />}
-						size="small"
-					/>
-				</Tooltip>
-			</div>
-		),
-	},
-];
-const redirectEditPage = () => {
-	console.log('hello');
-};
+
 // const data = [];
 // for (let i = 0; i < 100; i++) {
 // 	data.push({
@@ -107,6 +27,88 @@ class SongManagement extends React.Component {
 	componentDidMount() {
 		this.props.getListSong();
 	}
+	columns = [
+		{
+			title: 'Stt',
+			dataIndex: 'id',
+			width: 50,
+			render: (text, row, index) => {
+				if (index >= 0) {
+					return <p>{index + 1}</p>;
+				}
+			},
+		},
+		{
+			title: 'Image',
+			dataIndex: 'image',
+			width: 100,
+			render: (avatar) => <Image src={avatar} />,
+		},
+		{
+			title: 'Tên bài hát',
+			dataIndex: 'title',
+			width: 180,
+		},
+		{
+			title: 'Thể loại',
+			dataIndex: 'genre',
+			width: 120,
+		},
+		{
+			title: 'album',
+			dataIndex: 'album_id',
+			width: 130,
+		},
+		{
+			title: 'Ca sỹ',
+			dataIndex: 'artist_id',
+			width: 130,
+		},
+		{
+			title: 'Download',
+			dataIndex: 'download_permit',
+			width: 100,
+			render: (tags) => (
+				<span>
+					{tags ? (
+						<Tag color={'green'}>{'true'}</Tag>
+					) : (
+						<Tag color={'volcano'}>{'false'}</Tag>
+					)}
+				</span>
+			),
+		},
+		{
+			title: 'Actions',
+			dataIndex: 'id',
+			width: 130,
+			render: (id) => (
+				<div>
+					<Button
+						type="primary"
+						size="small"
+						// onClick={() => {
+						// 	this.redirectEditPage(id);
+						// }}
+					>
+						<Link to={`/admin/song-management/editSong/${id}`}>
+							sửa
+						</Link>
+					</Button>
+					<Button type="primary" danger size="small">
+						xóa
+					</Button>
+					<Tooltip title="xem thêm">
+						<Button
+							sharp="cicrle"
+							icon={<FileSearchOutlined />}
+							size="small"
+						/>
+					</Tooltip>
+				</div>
+			),
+		},
+	];
 	render() {
 		const listSong = this.props.dataSongs.item ?? [];
 		return (
@@ -121,7 +123,7 @@ class SongManagement extends React.Component {
 					Quản lý danh sách bài hát
 				</div>
 				<Table
-					columns={columns}
+					columns={this.columns}
 					dataSource={listSong}
 					pagination={{ pageSize: 50 }}
 					scroll={{ y: 340 }}
