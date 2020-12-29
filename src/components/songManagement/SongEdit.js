@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { Form, Input, Switch, Button } from 'antd';
+import './style/SongEditStyle.css';
+import UploadImg from './UploadImg';
 const layout = {
 	labelCol: {
 		span: 4,
@@ -60,7 +62,9 @@ class SongEdit extends React.Component {
 				>
 					Sửa thông tin bài hát
 				</div>
-				<button onClick={this.test}></button>
+				<button
+					onClick={() => console.log(this.state.songData)}
+				></button>
 				<Form
 					{...layout}
 					name="nest-messages"
@@ -86,13 +90,24 @@ class SongEdit extends React.Component {
 					>
 						<Switch defaultChecked />
 					</Form.Item>
-					<Form.Item name={['song', 'albumid']} label="Ca sỹ">
+					<Form.Item name={['song', 'singer']} label="Ca sỹ">
 						<Input />
 					</Form.Item>
 					<Form.Item name={['song', 'albumid']} label="Thuộc ablum">
 						<Input />
 					</Form.Item>
+
 					<Form.Item name={['song', 'imageid']} label="Ảnh đại diện">
+						<div className="song-edit-image-song-group">
+							<div className="song-edit-image-song">
+								<img
+									src="https://i.scdn.co/image/ab67706f00000003c414e7daf34690c9f983f76e"
+									alt="avatar"
+									style={{ width: '100%' }}
+								/>
+							</div>
+							<UploadImg></UploadImg>
+						</div>
 						<Input />
 					</Form.Item>
 					<Form.Item

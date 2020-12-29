@@ -5,6 +5,7 @@ import { FileSearchOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { getListSong } from './actions';
 import { Link } from 'react-router-dom';
+import { Popconfirm, message } from 'antd';
 
 // const data = [];
 // for (let i = 0; i < 100; i++) {
@@ -27,6 +28,16 @@ class SongManagement extends React.Component {
 	componentDidMount() {
 		this.props.getListSong();
 	}
+	confirm = (e) => {
+		console.log(e);
+		message.success('Xóa thành công');
+	};
+
+	cancel = (e) => {
+		console.log(e);
+		message.error('Hủy xóa');
+	};
+
 	columns = [
 		{
 			title: 'Stt',
@@ -95,9 +106,17 @@ class SongManagement extends React.Component {
 							sửa
 						</Link>
 					</Button>
-					<Button type="primary" danger size="small">
-						xóa
-					</Button>
+					<Popconfirm
+						title="Xác nhận xóa?"
+						onConfirm={this.confirm}
+						onCancel={this.cancel}
+						okText="Yes"
+						cancelText="No"
+					>
+						<Button type="primary" danger size="small">
+							xóa
+						</Button>
+					</Popconfirm>
 					<Tooltip title="xem thêm">
 						<Button
 							sharp="cicrle"
