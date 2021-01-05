@@ -58,7 +58,9 @@ class MainLayout extends React.Component {
 							</Link>
 						</Menu.Item>
 						<Menu.Item key="4" icon={<CloudOutlined />}>
-							<Link to="/admin/album-management">Quản lý album</Link>
+							<Link to="/admin/album-management">
+								Quản lý album
+							</Link>
 						</Menu.Item>
 						<Menu.Item key="5" icon={<UserOutlined />}>
 							<Link to="/admin/user-management">
