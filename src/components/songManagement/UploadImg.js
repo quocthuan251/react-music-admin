@@ -1,6 +1,8 @@
+import React from 'react';
 import { Upload, message } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import './UploadImg.css';
+import ImgCrop from 'antd-img-crop';
+import './style/UploadImgStyle.css';
 function getBase64(img, callback) {
 	const reader = new FileReader();
 	reader.addEventListener('load', () => callback(reader.result));
@@ -19,7 +21,7 @@ function beforeUpload(file) {
 	return isJpgOrPng && isLt2M;
 }
 
-class Avatar extends React.Component {
+class UploadImg extends React.Component {
 	state = {
 		loading: false,
 	};
@@ -39,7 +41,10 @@ class Avatar extends React.Component {
 			);
 		}
 	};
-
+	test = () => {
+		console.log('jel');
+		console.log(this.state.imageUrl);
+	};
 	render() {
 		const { loading, imageUrl } = this.state;
 		const uploadButton = (
@@ -49,25 +54,31 @@ class Avatar extends React.Component {
 			</div>
 		);
 		return (
-			<Upload
-				name="avatar"
-				listType="picture-card"
-				className="avatar-uploader"
-				showUploadList={false}
-				action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-				beforeUpload={beforeUpload}
-				onChange={this.handleChange}
-			>
-				{imageUrl ? (
-					<img
-						src={imageUrl}
-						alt="avatar"
-						style={{ width: '100%' }}
-					/>
-				) : (
-					uploadButton
-				)}
-			</Upload>
+			<>
+			
+				<ImgCrop rotate>
+					<Upload
+						name="avatar"
+						listType="picture-card"
+						className="avatar-uploader"
+						showUploadList={false}
+						action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+						beforeUpload={beforeUpload}
+						onChange={this.handleChange}
+					>
+						{imageUrl ? (
+							<img
+								src={imageUrl}
+								alt="avatar"
+								style={{ width: '100%' }}
+							/>
+						) : (
+							uploadButton
+						)}
+					</Upload>
+				</ImgCrop>
+			</>
 		);
 	}
 }
+export default UploadImg;

@@ -1,0 +1,11 @@
+.song-edit-image-song {
+	width: 128px;
+	height: 128px;
+}
+.song-edit-image-song-group {
+	display: flex;
+	flex-wrap: nowrap;
+}
+.ant-upload-picture-card-wrapper {
+	width: 20%;
+}
