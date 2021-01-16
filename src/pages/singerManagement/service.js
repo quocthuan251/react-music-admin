@@ -7,7 +7,7 @@ export const getListSinger = (
 	typeAuthor = 'Token'
 ) => {
 	return axios({
-		url: `http://demo7080721.mockable.io/get-list-recommend-song`,
+		url: `https://demo7080721.mockable.io/node-list-artist`,
 		method: method,
 		headers: {
 			'content-type': 'application/json',

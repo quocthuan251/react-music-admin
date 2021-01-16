@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Tag, Image } from 'antd';
 import { Button, Tooltip } from 'antd';
-import { FileSearchOutlined } from '@ant-design/icons';
+import { FileSearchOutlined, PlusOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { getListSong } from './actions';
 import { Link } from 'react-router-dom';
@@ -28,8 +28,8 @@ class SongManagement extends React.Component {
 	componentDidMount() {
 		this.props.getListSong();
 	}
-	confirm = (e) => {
-		console.log(e);
+	confirm = (id) => {
+		console.log(id + ' id xoa');
 		message.success('Xóa thành công');
 	};
 
@@ -44,9 +44,7 @@ class SongManagement extends React.Component {
 			dataIndex: 'id',
 			width: 50,
 			render: (text, row, index) => {
-				if (index >= 0) {
-					return <p>{index + 1}</p>;
-				}
+				if (index >= 0) return <p>{index + 1}</p>;
 			},
 		},
 		{
@@ -103,18 +101,18 @@ class SongManagement extends React.Component {
 						// }}
 					>
 						<Link to={`/admin/song-management/editSong/${id}`}>
-							sửa
+							Sửa
 						</Link>
 					</Button>
 					<Popconfirm
 						title="Xác nhận xóa?"
-						onConfirm={this.confirm}
+						onConfirm={() => this.confirm(id)}
 						onCancel={this.cancel}
 						okText="Yes"
 						cancelText="No"
 					>
 						<Button type="primary" danger size="small">
-							xóa
+							Xóa
 						</Button>
 					</Popconfirm>
 					<Tooltip title="xem thêm">
@@ -140,6 +138,17 @@ class SongManagement extends React.Component {
 					}}
 				>
 					Quản lý danh sách bài hát
+				</div>
+				<div>
+					<Button
+						type="primary"
+						style={{ float: 'right', margin: '0rem 5rem 1rem' }}
+					>
+						<Link to={`/admin/song-management/addSong`}>
+							<PlusOutlined />
+							Thêm bài hát
+						</Link>
+					</Button>
 				</div>
 				<Table
 					columns={this.columns}
