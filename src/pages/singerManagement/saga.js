@@ -9,6 +9,7 @@ import * as Api from './service';
 function* getDataSinger() {
 	try {
 		const { response, error } = yield call(Api.getListSinger);
+		console.log('haha');
 		yield put({
 			type: GET_LIST_SINGERS_SUCCESS,
 			data: response.data,

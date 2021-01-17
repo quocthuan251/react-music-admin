@@ -18,7 +18,7 @@ import { Popconfirm, message } from 'antd';
 // 		singer: 'Táo, JustaTee, Đen',
 // 		tags: true,
 // 		name: `Đi về nhà ${i}`,
-// 	});
+// 	});`
 // }
 class SongManagement extends React.Component {
 	constructor(props) {
