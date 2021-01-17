@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table, Tag, Avatar, Image } from 'antd';
-
+import { connect } from 'react-redux';
+import { getListSingerManager } from './action';
 const columns = [
 	{
 		title: 'Avatar',
@@ -63,13 +64,14 @@ for (let i = 0; i < 100; i++) {
 class SingerManagement extends React.Component {
 	constructor(props) {
 		super(props);
-
-		// We declare the state as shown below
-
 		this.state = {
 			x: 'This is x from state',
 			y: 'This is y from state',
 		};
+	}
+	componentDidMount() {
+		this.props.getListSingerManager();
+		console.log('jwjelj');
 	}
 	render() {
 		return (
@@ -82,4 +84,12 @@ class SingerManagement extends React.Component {
 		);
 	}
 }
-export default SingerManagement;
+const mapStateToProps = (state) => ({
+	data: state.reducerSinger,
+	loading: state.reducerSinger.loading,
+	error: state.reducerSinger.error,
+});
+const mapDispatchToProps = {
+	getListSingerManager,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SingerManagement);
