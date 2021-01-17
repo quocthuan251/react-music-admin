@@ -13,6 +13,7 @@ function* getDataSong() {
 			type: GET_LIST_SONGS_SUCCESS,
 			data: response.data,
 		});
+	
 	} catch (error) {
 		console.log('ERROR: ', error);
 		yield put({ type: GET_LIST_SONGS_FAIL, error: error });

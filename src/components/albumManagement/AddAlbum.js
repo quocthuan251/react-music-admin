@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { Form, Input, Switch, Button } from 'antd';
-import './style/SongEditStyle.css';
+import '../songManagement/style/SongEditStyle.css';
+// import '../songManagement/style/UploadImg.css';
 import UploadImg from '../UploadImg';
 
 const layout = {
@@ -23,17 +24,16 @@ const validateMessages = {
 	},
 };
 
-class AddSong extends React.Component {
+class AddAlbum extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			songData: {
-				title: '',
-				genre: '',
-				path: '',
+			albumData: {
+				name: '',
 				image: '',
-				album: '',
-				artist: '',
+				releasedDate: '',
+				totalTracks: 5,
+				genreDTO: '',
 			},
 		};
 		this.handleChange = this.handleChange.bind(this);
@@ -48,8 +48,8 @@ class AddSong extends React.Component {
 	}
 
 	handleSubmit = (event) => {
-		alert('A name was submitted: ' + this.state.songData);
-		console.log(this.state.songData);
+		alert('A name was submitted: ' + this.state.userData);
+		console.log(this.state.userData);
 		event.preventDefault();
 	};
 
@@ -63,7 +63,7 @@ class AddSong extends React.Component {
 						marginBottom: 25,
 					}}
 				>
-					Thêm thông tin bài hát
+					Thêm thông tin Album
 				</div>
 				<Form
 					{...layout}
@@ -72,8 +72,8 @@ class AddSong extends React.Component {
 					validateMessages={validateMessages}
 				>
 					<Form.Item
-						name={['song', 'title']}
-						label="Tên bài hát"
+						name={['album', 'name']}
+						label="Tên Album"
 						rules={[
 							{
 								required: true,
@@ -81,31 +81,35 @@ class AddSong extends React.Component {
 						]}
 					>
 						<Input
-							value={this.state.title}
+							value={this.state.name}
 							onChange={this.handleChange}
 						/>
 					</Form.Item>
 					<Form.Item
-						name={['song', 'download_premit']}
-						label="Cho phép download"
-						valuePropName="checked"
-						style={{ textAlign: 'left' }}
+						name={['album', 'releasedDate']}
+						label="Ngày khởi tạo"
 					>
-						<Switch defaultChecked />
-					</Form.Item>
-					<Form.Item name={['song', 'singer']} label="Ca sỹ">
 						<Input
-							value={this.state.artist}
+							value={this.state.releasedDate}
 							onChange={this.handleChange}
 						/>
 					</Form.Item>
-					<Form.Item name={['song', 'albumid']} label="Thuộc ablum">
+					<Form.Item
+						name={['album', 'totalTracks']}
+						label="Số bài hát"
+					>
 						<Input
-							value={this.state.album}
+							value={this.state.totalTracks}
 							onChange={this.handleChange}
 						/>
 					</Form.Item>
-					<Form.Item name={['song', 'imageid']} label="Ảnh đại diện">
+					<Form.Item name={['album', 'genreDTO']} label="Thể loại">
+						<Input
+							value={this.state.genreDTO}
+							onChange={this.handleChange}
+						/>
+					</Form.Item>
+					<Form.Item name={['user', 'image']} label="Ảnh đại diện">
 						<div className="song-edit-image-song-group">
 							<div className="song-edit-image-song">
 								<img
@@ -122,15 +126,6 @@ class AddSong extends React.Component {
 							onChange={this.handleChange}
 						/>
 					</Form.Item>
-					<Form.Item
-						name={['song', 'share_links']}
-						label="Tải lên bài hát"
-					>
-						<Input.TextArea
-							value={this.state.path}
-							onChange={this.handleChange}
-						/>
-					</Form.Item>
 					<Form.Item wrapperCol={{ ...layout.wrapperCol }}>
 						{/* <input type="submit" value="Submit" /> */}
 						<Button type="submit" htmlType="submit">
@@ -143,4 +138,4 @@ class AddSong extends React.Component {
 	}
 }
 
-export default AddSong;
+export default AddAlbum;

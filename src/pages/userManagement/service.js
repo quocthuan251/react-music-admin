@@ -7,9 +7,11 @@ export const getListUser = (
 	typeAuthor = 'Token'
 ) => {
 	return axios({
-		url: `http://demo7080721.mockable.io/get-list-recommend-song`,
+		url: `http://localhost:8081/user?limit=4&page=1`,
 		method: method,
 		headers: {
+			Authorization:
+				'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjEwODkxMTc3LCJleHAiOjE2MTE0OTU5Nzd9.lUwpuhjsg0XlnaaqBsXO6d6x_-wsPrggd0cyzeNy9RNCi27e6qQjpLcEqKY5ZCZfCAfdpGIIHrBo7Jg4Nx0V-g',
 			'content-type': 'application/json',
 			accept: 'application/json',
 		},

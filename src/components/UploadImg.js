@@ -2,7 +2,7 @@ import React from 'react';
 import { Upload, message } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
-import './style/UploadImgStyle.css';
+import './songManagement/style/UploadImgStyle.css';
 function getBase64(img, callback) {
 	const reader = new FileReader();
 	reader.addEventListener('load', () => callback(reader.result));
@@ -55,7 +55,6 @@ class UploadImg extends React.Component {
 		);
 		return (
 			<>
-			
 				<ImgCrop rotate>
 					<Upload
 						name="avatar"

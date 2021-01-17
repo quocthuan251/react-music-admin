@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Form, Input, Switch, Button } from 'antd';
 import './style/SingerEditStyle.css';
-import UploadImg from '../songManagement/UploadImg';
+import UploadImg from '../UploadImg';
 import { connect } from 'react-redux';
 
 const layout = {
@@ -59,7 +59,6 @@ class SingerEdit extends React.Component {
 				>
 					Sửa thông tin nghệ sĩ
 				</div>
-				{/* <button onClick={() => this.testhandler()}></button> */}
 				<Form
 					{...layout}
 					name="nest-messages"
@@ -77,17 +76,9 @@ class SingerEdit extends React.Component {
 					>
 						<Input
 							defaultValue={this.state.singerData.name}
-							// onChange={this.state.singerData.name}
+							onChange={this.state.singerData.name}
 						/>
 					</Form.Item>
-					{/* <Form.Item
-						name={['singer', 'gender']}
-						label="Cho phép download"
-						valuePropName="checked"
-						style={{ textAlign: 'left' }}
-					>
-						<Switch defaultChecked />
-					</Form.Item> */}
 					<Form.Item name={['singer', 'gender']} label="Giới tính">
 						<Input defaultValue={this.state.singerData.gender} />
 					</Form.Item>
@@ -106,8 +97,8 @@ class SingerEdit extends React.Component {
 						<div className="singer-edit-image-singer-group">
 							<div className="singer-edit-image-singer">
 								<img
-									// src="https://i.scdn.co/image/ab67706f00000003c414e7daf34690c9f983f76e"
-									src={this.state.singerData.thumbnail}
+									src="https://i.scdn.co/image/ab67706f00000003c414e7daf34690c9f983f76e"
+									// src={this.state.singerData.thumbnail}
 									alt="avatar"
 									style={{ width: '100%' }}
 								/>

@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-export const getListSinger = (
+export const getListAlbum = (
 	endpoint,
 	body,
 	method = 'GET',
 	typeAuthor = 'Token'
 ) => {
 	return axios({
-		url: `http://localhost:8081/user/singer?page=1&limit=10`,
+		url: `http://localhost:8081/album?page=1&limit=4`,
 		method: method,
 		headers: {
 			Authorization:

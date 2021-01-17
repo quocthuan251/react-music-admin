@@ -3,17 +3,17 @@ import { Table, Tag, Image } from 'antd';
 import { Button, Tooltip } from 'antd';
 import { FileSearchOutlined, PlusOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
-import { getListUser } from './action';
+import { getListAlbum } from './action';
 import { Link } from 'react-router-dom';
 import { Popconfirm, message } from 'antd';
 
-class UserManagement extends React.Component {
+class AlbumManagement extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
 	}
 	componentDidMount() {
-		this.props.getListUser();
+		this.props.getListAlbum();
 	}
 	confirm = (id) => {
 		console.log(id + ' id xoa');
@@ -35,45 +35,38 @@ class UserManagement extends React.Component {
 			},
 		},
 		{
-			title: 'UserName',
-			dataIndex: 'userName',
+			title: 'Image',
+			dataIndex: 'image.imgLocation',
 			width: 100,
+			render: (avatar) => <Image src={avatar} />,
 		},
 		{
-			title: 'Tên',
-			dataIndex: 'firstName',
-			width: 80,
+			title: 'Tên Album',
+			dataIndex: 'name',
+			width: 180,
 		},
 		{
-			title: 'Họ',
-			dataIndex: 'lastName',
-			width: 80,
+			title: 'Ngày tạo',
+			dataIndex: 'releasedDate',
+			width: 120,
 		},
 		{
-			title: 'Email',
-			dataIndex: 'email',
-			width: 170,
+			title: 'Số bài hát',
+			dataIndex: 'totalTracks',
+			width: 130,
 		},
 		{
-			title: 'Giới tính',
-			dataIndex: 'gender',
+			title: 'Thể loại',
+			dataIndex: 'genreDTO.name',
+			width: 130,
+		},
+		{
+			title: 'Download',
+			dataIndex: 'downloadPermit',
 			width: 100,
-		},
-		{
-			title: 'Ngày sinh',
-			dataIndex: 'birthDay',
-		},
-		{
-			title: 'Role',
-			dataIndex: 'userType',
-			width: 60,
-		},
-		{
-			title: 'Tình trạng',
-			dataIndex: 'activityStatus',
-			render: (tags) => (
+			render: (downloadPermit) => (
 				<span>
-					{tags ? (
+					{downloadPermit ? (
 						<Tag color={'green'}>{'true'}</Tag>
 					) : (
 						<Tag color={'volcano'}>{'false'}</Tag>
@@ -84,6 +77,7 @@ class UserManagement extends React.Component {
 		{
 			title: 'Actions',
 			dataIndex: 'id',
+			width: 130,
 			render: (id) => (
 				<div>
 					<Button
@@ -93,7 +87,7 @@ class UserManagement extends React.Component {
 						// 	this.redirectEditPage(id);
 						// }}
 					>
-						<Link to={`/admin/user-management/editUser/${id}`}>
+						<Link to={`/admin/album-management/editAlbum/${id}`}>
 							Sửa
 						</Link>
 					</Button>
@@ -120,7 +114,7 @@ class UserManagement extends React.Component {
 		},
 	];
 	render() {
-		const listUsers = this.props.dataUsers ?? [];
+		const listAlbums = this.props.dataAlbums ?? [];
 		return (
 			<div>
 				<div
@@ -130,22 +124,22 @@ class UserManagement extends React.Component {
 						marginBottom: 25,
 					}}
 				>
-					Quản lý danh sách Users
+					Quản lý danh sách Album
 				</div>
 				<div>
 					<Button
 						type="primary"
 						style={{ float: 'right', margin: '0rem 5rem 1rem' }}
 					>
-						<Link to={`/admin/user-management/addUser`}>
+						<Link to={`/admin/album-management/addAlbum`}>
 							<PlusOutlined />
-							Thêm User
+							Thêm Album
 						</Link>
 					</Button>
 				</div>
 				<Table
 					columns={this.columns}
-					dataSource={listUsers}
+					dataSource={listAlbums}
 					pagination={{ pageSize: 50 }}
 					scroll={{ y: 340 }}
 				/>
@@ -154,11 +148,11 @@ class UserManagement extends React.Component {
 	}
 }
 const mapStateToProps = (state) => ({
-	dataUsers: state.reducerUser.data.listResult,
-	loading: state.reducerUser.loading,
-	error: state.reducerUser.error,
+	dataAlbums: state.reducerAlbum.data.listResult,
+	loading: state.reducerAlbum.loading,
+	error: state.reducerAlbum.error,
 });
 const mapDispatchToProps = {
-	getListUser,
+	getListAlbum,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(UserManagement);
+export default connect(mapStateToProps, mapDispatchToProps)(AlbumManagement);

@@ -3,10 +3,12 @@ import { combineReducers } from 'redux';
 import reducerSong from '../pages/songManagement/reducer';
 import reducerSinger from '../pages/singerManagement/reducer';
 import reducerUser from '../pages/userManagement/reducer';
+import reducerAlbum from '../pages/albumManagement/reducer';
 
 const reducer = combineReducers({
 	reducerSinger,
 	reducerSong,
 	reducerUser,
+	reducerAlbum
 });
 export default reducer;
