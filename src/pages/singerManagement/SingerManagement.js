@@ -1,95 +1,147 @@
 import React from 'react';
-import { Table, Tag, Avatar, Image } from 'antd';
+import { Table, Tag, Avatar, Image, Button, Tooltip } from 'antd';
+import { Popconfirm, message } from 'antd';
 import { connect } from 'react-redux';
-import { getListSingerManager } from './action';
-const columns = [
-	{
-		title: 'Avatar',
-		dataIndex: 'avatar',
-		width: 100,
-		render: (avatar) => <Avatar src={<Image src={avatar} />} />,
-	},
-	{
-		title: 'Tên',
-		dataIndex: 'name',
-		width: 150,
-	},
-	{
-		title: 'SĐT',
-		dataIndex: 'sdt',
-		width: 130,
-	},
-	{
-		title: 'Email',
-		dataIndex: 'email',
-		width: 200,
-	},
-	{
-		title: 'Role',
-		dataIndex: 'role',
-		width: 100,
-	},
-	{
-		title: 'Trạng thái',
-		dataIndex: 'tags',
-		render: (tags) => (
-			<span>
-				{tags ? (
-					<Tag color={'green'}>{'true'}</Tag>
-				) : (
-					<Tag color={'volcano'}>{'false'}</Tag>
-				)}
-			</span>
-		),
-	},
-	{
-		title: 'Actions',
-		dataIndex: '',
-		render: () => <a>Delete</a>,
-	},
-];
-const data = [];
-for (let i = 0; i < 100; i++) {
-	data.push({
-		key: i,
-		avatar:
-			'https://scontent.fvca1-2.fna.fbcdn.net/v/t1.0-9/86707646_1602040093295615_472465412085252096_o.jpg?_nc_cat=109&ccb=2&_nc_sid=09cbfe&_nc_ohc=XNf8CvhtjogAX9SDUcW&_nc_ht=scontent.fvca1-2.fna&oh=3abaebc0a4d3021e80affa3ae411cc61&oe=60086BFD',
-		sdt: '01663300199',
-		email: 'quocthuan25@gmail.com',
-		role: 'admin',
-		tags: true,
-		name: `Thuận ${i}`,
-	});
-}
+import { FileSearchOutlined } from '@ant-design/icons';
+import { getListSinger } from './action';
+import { Link } from 'react-router-dom';
+
 class SingerManagement extends React.Component {
 	constructor(props) {
 		super(props);
+
 		this.state = {
-			x: 'This is x from state',
-			y: 'This is y from state',
+			dataSingers: {},
 		};
 	}
+	columns = [
+		{
+			title: 'Stt',
+			dataIndex: 'id',
+			width: 70,
+			render: (text, row, index) => {
+				if (index >= 0) {
+					return <p>{index + 1}</p>;
+				}
+			},
+		},
+		{
+			title: 'Avatar',
+			dataIndex: 'thumbnail',
+			width: 150,
+			render: (thumbnail) => <Avatar src={<Image src={thumbnail} />} />,
+		},
+		{
+			title: 'Tên',
+			dataIndex: 'name',
+			width: 150,
+		},
+		{
+			title: 'Giới tính',
+			dataIndex: 'gender',
+			width: 150,
+		},
+		{
+			title: 'Quốc Gia',
+			dataIndex: 'nationality',
+			width: 150,
+		},
+		{
+			title: 'Trạng thái',
+			dataIndex: 'tags',
+			render: (tags) => (
+				<span>
+					{tags ? (
+						<Tag color={'green'}>{'true'}</Tag>
+					) : (
+						<Tag color={'volcano'}>{'false'}</Tag>
+					)}
+				</span>
+			),
+		},
+		{
+			title: 'Actions',
+			dataIndex: 'name',
+			width: 200,
+			render: (name) => (
+				<div>
+					<Button
+						type="primary"
+						size="small"
+						// onClick={() => {
+						// 	this.redirectEditPage(id);
+						// }}
+					>
+						<Link
+							to={`/admin/singer-management/editSinger/${name}`}
+						>
+							Sửa
+						</Link>
+					</Button>
+					<Popconfirm
+						title="Xác nhận xóa?"
+						onConfirm={() => this.confirm(name)}
+						onCancel={this.cancel}
+						okText="Yes"
+						cancelText="No"
+					>
+						<Button type="primary" danger size="small">
+							Xóa
+						</Button>
+					</Popconfirm>
+					<Tooltip title="xem thêm">
+						<Button
+							sharp="cicrle"
+							icon={<FileSearchOutlined />}
+							size="small"
+						/>
+					</Tooltip>
+				</div>
+			),
+		},
+	];
 	componentDidMount() {
-		this.props.getListSingerManager();
-		console.log('jwjelj');
+		this.props.getListSinger();
 	}
+
+	confirm = (name) => {
+		console.log(name + ' id xoa');
+		message.success('Xóa thành công');
+	};
+
+	cancel = (e) => {
+		console.log(e);
+		message.error('Hủy xóa');
+	};
 	render() {
+		const listSinger = this.props.dataSingers.data ?? [];
 		return (
-			<Table
-				columns={columns}
-				dataSource={data}
-				pagination={{ pageSize: 50 }}
-				scroll={{ y: 340 }}
-			/>
+			<>
+				<div
+					style={{
+						fontWeight: 700,
+						fontSize: 25,
+						marginBottom: 25,
+					}}
+				>
+					Quản lý danh sách nghệ sĩ
+				</div>
+				<Table
+					columns={this.columns}
+					dataSource={listSinger}
+					pagination={{ pageSize: 50 }}
+					scroll={{ y: 340 }}
+				/>
+			</>
 		);
 	}
 }
 const mapStateToProps = (state) => ({
-	data: state.reducerSinger,
+	dataSingers: state.reducerSinger.data,
 	loading: state.reducerSinger.loading,
 	error: state.reducerSinger.error,
 });
 const mapDispatchToProps = {
-	getListSingerManager,
+	getListSinger,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SingerManagement);

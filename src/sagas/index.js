@@ -4,6 +4,6 @@ import singerFlow from '../pages/singerManagement/saga';
 // import artistFlow from '../components/singer/saga';
 // import usersFlow from '../pages/userProfile/saga';
 export default function* rootSaga() {
-	yield all([songFlow()]);
-	yield all([singerFlow()]);
+	yield all([songFlow(), singerFlow()]);
+
 }

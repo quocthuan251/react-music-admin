@@ -1,0 +1,20 @@
+.singer-edit-image-singer {
+	width: 128px;
+	height: 128px;
+}
+.singer-edit-image-singer-group {
+	display: flex;
+	flex-wrap: nowrap;
+}
+.ant-upload-picture-card-wrapper {
+	width: 20%;
+}
+
+.singer-edit-cover-image-singer {
+	width: 607px;
+	height: 200px;
+}
+.singer-edit-cover-image-singer-group {
+	display: flex;
+	flex-wrap: nowrap;
+}
