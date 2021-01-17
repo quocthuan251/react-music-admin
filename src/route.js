@@ -13,7 +13,10 @@ const SingerManagementPage = lazy(() =>
 );
 const SongEdit = lazy(() => import('./components/songManagement/SongEdit'));
 const LogAction = lazy(() => import('./pages/logAction/LogAction'));
-
+const SingerEdit = lazy(() =>
+	import('./components/singerManagement/SingerEdit')
+);
+const AddSong = lazy(() => import('./components/songManagement/AddSong'));
 const Error404 = lazy(() => import('./common/errorPage/Error404'));
 const route = [
 	{
@@ -64,6 +67,20 @@ const route = [
 		auth: false,
 		layout: MainLayout,
 		main: (props) => <LogAction router={props} />,
+	},
+	{
+		path: '/admin/singer-management/editSinger/:name',
+		exact: true,
+		auth: false,
+		layout: MainLayout,
+		main: (props) => <SingerEdit router={props} />,
+	},
+	{
+		path: '/admin/song-management/addSong',
+		exact: true,
+		auth: false,
+		layout: MainLayout,
+		main: (props) => <AddSong router={props} />,
 	},
 	{
 		layout: LoginLayout,

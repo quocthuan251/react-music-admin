@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Form, Input, Switch, Button } from 'antd';
 import './style/SongEditStyle.css';
 import UploadImg from './UploadImg';
-import { connect } from 'react-redux';
 
 const layout = {
 	labelCol: {
@@ -24,43 +23,22 @@ const validateMessages = {
 	},
 };
 
-class SongEdit extends React.Component {
+class AddSong extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			songData: {
+				title: '',
+				genre: '',
+				path: '',
+				image: '',
+				album: '',
+				artist: '',
+			},
+		};
+		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		const idItem = props.router.match.params.songId;
-		if (props.dataSongs.item) {
-			const items = props.dataSongs.item.find(
-				(item, index) => item.id === idItem
-			);
-			this.state = {
-				songData: {
-					title: items.title,
-					genre: items.genre,
-					path: items.path,
-					image: items.image,
-					album_id: items.album_id,
-					artist_id: items.artist_id,
-				},
-			};
-		} else {
-			this.state = {
-				songData: {
-					title: '',
-					genre: '',
-					path: '',
-					image: '',
-					album_id: '',
-					artist_id: '',
-				},
-			};
-		}
 	}
-
-	handleSubmit = (event) => {
-		console.log(event + ' 123213');
-		event.preventDefault();
-	};
 
 	handleChange(event) {
 		this.setState({ value: event.target.value });
@@ -69,8 +47,10 @@ class SongEdit extends React.Component {
 		);
 	}
 
-	testhandler = () => {
+	handleSubmit = (event) => {
+		alert('A name was submitted: ' + this.state.songData);
 		console.log(this.state.songData);
+		event.preventDefault();
 	};
 
 	render() {
@@ -83,13 +63,11 @@ class SongEdit extends React.Component {
 						marginBottom: 25,
 					}}
 				>
-					Sửa thông tin bài hát
+					Thêm thông tin bài hát
 				</div>
-				<Button onClick={() => this.testhandler()}> tesst </Button>
 				<Form
 					{...layout}
 					name="nest-messages"
-					// onFinish={this.onFinish}
 					onFinish={this.handleSubmit}
 					validateMessages={validateMessages}
 				>
@@ -103,8 +81,7 @@ class SongEdit extends React.Component {
 						]}
 					>
 						<Input
-							defaultValue={this.state.songData.title}
-							value={this.state.songData.title}
+							value={this.state.title}
 							onChange={this.handleChange}
 						/>
 					</Form.Item>
@@ -117,44 +94,53 @@ class SongEdit extends React.Component {
 						<Switch defaultChecked />
 					</Form.Item>
 					<Form.Item name={['song', 'singer']} label="Ca sỹ">
-						<Input defaultValue={this.state.songData.artist_id} />
+						<Input
+							value={this.state.artist}
+							onChange={this.handleChange}
+						/>
 					</Form.Item>
 					<Form.Item name={['song', 'albumid']} label="Thuộc ablum">
-						<Input defaultValue={this.state.songData.album_id} />
+						<Input
+							value={this.state.album}
+							onChange={this.handleChange}
+						/>
 					</Form.Item>
 					<Form.Item name={['song', 'imageid']} label="Ảnh đại diện">
 						<div className="song-edit-image-song-group">
 							<div className="song-edit-image-song">
 								<img
-									// src="https://i.scdn.co/image/ab67706f00000003c414e7daf34690c9f983f76e"
-									src={this.state.songData.image}
+									src="https://i.scdn.co/image/ab67706f00000003c414e7daf34690c9f983f76e"
+									// src={this.state.songData.image}
 									alt="avatar"
 									style={{ width: '100%' }}
 								/>
 							</div>
 							<UploadImg />
 						</div>
-						<Input defaultValue={this.state.songData.image} />
+						<Input
+							value={this.state.image}
+							onChange={this.handleChange}
+						/>
 					</Form.Item>
 					<Form.Item
 						name={['song', 'share_links']}
 						label="Tải lên bài hát"
 					>
 						<Input.TextArea
-							defaultValue={this.state.songData.path}
+							value={this.state.path}
+							onChange={this.handleChange}
 						/>
 					</Form.Item>
-					<Form.Item wrapperCol={{ ...layout.wrapperCol }}>
-						<Button type="primary" htmlType="submit">
+					{/* <Form.Item wrapperCol={{ ...layout.wrapperCol }}> */}
+					<input type="submit" value="Submit" />
+					{/* <Button type="submit" htmlType="submit">
 							Hoàn thành
-						</Button>
-					</Form.Item>
+						</Button> */}
+					{/* </Form.Item> */}
 				</Form>
 			</div>
 		);
 	}
 }
-const mapStateToProps = (state) => ({
-	dataSongs: state.reducerSong.data,
-});
-export default connect(mapStateToProps, null)(SongEdit);
+
+export default AddSong;
