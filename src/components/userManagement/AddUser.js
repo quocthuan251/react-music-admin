@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Form, Input, Switch, Button } from 'antd';
-import './style/SongEditStyle.css';
+import '../songManagement/style/SongEditStyle.css';
 import UploadImg from '../UploadImg';
 
 const layout = {
@@ -23,17 +23,22 @@ const validateMessages = {
 	},
 };
 
-class AddSong extends React.Component {
+class AddUser extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			songData: {
-				title: '',
-				genre: '',
-				path: '',
-				image: '',
-				album: '',
-				artist: '',
+			userData: {
+				userName: '',
+				firstName: '',
+				lastName: '',
+				email: '',
+				password: '',
+				gender: '',
+				birthDay: '',
+				activityStatus: 1,
+				userType: {
+					id: 1,
+				},
 			},
 		};
 		this.handleChange = this.handleChange.bind(this);
@@ -48,8 +53,8 @@ class AddSong extends React.Component {
 	}
 
 	handleSubmit = (event) => {
-		alert('A name was submitted: ' + this.state.songData);
-		console.log(this.state.songData);
+		alert('A name was submitted: ' + this.state.userData);
+		console.log(this.state.userData);
 		event.preventDefault();
 	};
 
@@ -63,7 +68,7 @@ class AddSong extends React.Component {
 						marginBottom: 25,
 					}}
 				>
-					Thêm thông tin bài hát
+					Thêm thông tin User
 				</div>
 				<Form
 					{...layout}
@@ -72,8 +77,8 @@ class AddSong extends React.Component {
 					validateMessages={validateMessages}
 				>
 					<Form.Item
-						name={['song', 'title']}
-						label="Tên bài hát"
+						name={['user', 'userName']}
+						label="Tên tài khoản"
 						rules={[
 							{
 								required: true,
@@ -81,53 +86,51 @@ class AddSong extends React.Component {
 						]}
 					>
 						<Input
-							value={this.state.title}
+							value={this.state.userName}
 							onChange={this.handleChange}
 						/>
 					</Form.Item>
 					<Form.Item
-						name={['song', 'download_premit']}
-						label="Cho phép download"
+						name={['user', 'activityStatus']}
+						label="Kích hoạt hoạt động"
 						valuePropName="checked"
 						style={{ textAlign: 'left' }}
 					>
 						<Switch defaultChecked />
 					</Form.Item>
-					<Form.Item name={['song', 'singer']} label="Ca sỹ">
+					<Form.Item name={['user', 'firstName']} label="Tên">
 						<Input
-							value={this.state.artist}
+							value={this.state.firstName}
 							onChange={this.handleChange}
 						/>
 					</Form.Item>
-					<Form.Item name={['song', 'albumid']} label="Thuộc ablum">
+					<Form.Item name={['user', 'lastName']} label="Họ">
 						<Input
-							value={this.state.album}
+							value={this.state.lastName}
 							onChange={this.handleChange}
 						/>
 					</Form.Item>
-					<Form.Item name={['song', 'imageid']} label="Ảnh đại diện">
-						<div className="song-edit-image-song-group">
-							<div className="song-edit-image-song">
-								<img
-									src="https://i.scdn.co/image/ab67706f00000003c414e7daf34690c9f983f76e"
-									// src={this.state.songData.image}
-									alt="avatar"
-									style={{ width: '100%' }}
-								/>
-							</div>
-							<UploadImg />
-						</div>
+					<Form.Item name={['user', 'email']} label="Email">
 						<Input
-							value={this.state.image}
+							value={this.state.email}
 							onChange={this.handleChange}
 						/>
 					</Form.Item>
-					<Form.Item
-						name={['song', 'share_links']}
-						label="Tải lên bài hát"
-					>
-						<Input.TextArea
-							value={this.state.path}
+					<Form.Item name={['user', 'gender']} label="Giới tính">
+						<Input
+							value={this.state.gender}
+							onChange={this.handleChange}
+						/>
+					</Form.Item>
+					<Form.Item name={['user', 'birthDay']} label="Ngày sinh">
+						<Input
+							value={this.state.birthDay}
+							onChange={this.handleChange}
+						/>
+					</Form.Item>
+					<Form.Item name={['user', 'password']} label="Mật Khẩu">
+						<Input
+							value={this.state.password}
 							onChange={this.handleChange}
 						/>
 					</Form.Item>
@@ -143,4 +146,4 @@ class AddSong extends React.Component {
 	}
 }
 
-export default AddSong;
+export default AddUser;

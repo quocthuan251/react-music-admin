@@ -1,8 +1,8 @@
 import {
-	GET_LIST_SONGS,
-	GET_LIST_SONGS_SUCCESS,
-	GET_LIST_SONGS_FAIL,
-} from './actions';
+	GET_LIST_ALBUMS,
+	GET_LIST_ALBUMS_SUCCESS,
+	GET_LIST_ALBUMS_FAIL,
+} from './action';
 import { openNotificationWithIcon } from '../../utils/index';
 import { STATUS } from '../../common/enums/status';
 const initialState = {
@@ -11,20 +11,20 @@ const initialState = {
 	error: '',
 };
 
-const reducerSong = (state = initialState, action) => {
+const reducerAlbum = (state = initialState, action) => {
 	switch (action.type) {
-		case GET_LIST_SONGS: {
+		case GET_LIST_ALBUMS: {
 			return { ...state, loading: true, error: '' };
 		}
-		case GET_LIST_SONGS_SUCCESS: {
+		case GET_LIST_ALBUMS_SUCCESS: {
 			openNotificationWithIcon(STATUS.SUCCESS, 'Update Succeeded', 3);
 			return { ...state, data: action.data, loading: false };
 		}
-		case GET_LIST_SONGS_FAIL: {
+		case GET_LIST_ALBUMS_FAIL: {
 			return { ...state, loading: false, error: action.error };
 		}
 		default:
 			return state;
 	}
 };
-export default reducerSong;
+export default reducerAlbum;

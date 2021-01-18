@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Form, Input, Switch, Button } from 'antd';
 import './style/SongEditStyle.css';
-import UploadImg from './UploadImg';
+import UploadImg from '../UploadImg';
 import { connect } from 'react-redux';
 
 const layout = {
@@ -34,14 +34,7 @@ class SongEdit extends React.Component {
 				(item, index) => item.id === idItem
 			);
 			this.state = {
-				songData: {
-					title: items.title,
-					genre: items.genre,
-					path: items.path,
-					image: items.image,
-					album_id: items.album_id,
-					artist_id: items.artist_id,
-				},
+				songData: items,
 			};
 		} else {
 			this.state = {
@@ -58,15 +51,11 @@ class SongEdit extends React.Component {
 	}
 
 	handleSubmit = (event) => {
-		console.log(event + ' 123213');
 		event.preventDefault();
 	};
 
 	handleChange(event) {
 		this.setState({ value: event.target.value });
-		console.log(
-			event.target.value + ' a bc ' + { value: event.target.value }
-		);
 	}
 
 	testhandler = () => {
@@ -85,7 +74,6 @@ class SongEdit extends React.Component {
 				>
 					Sửa thông tin bài hát
 				</div>
-				<Button onClick={() => this.testhandler()}> tesst </Button>
 				<Form
 					{...layout}
 					name="nest-messages"
@@ -126,8 +114,8 @@ class SongEdit extends React.Component {
 						<div className="song-edit-image-song-group">
 							<div className="song-edit-image-song">
 								<img
-									// src="https://i.scdn.co/image/ab67706f00000003c414e7daf34690c9f983f76e"
-									src={this.state.songData.image}
+									src="https://i.scdn.co/image/ab67706f00000003c414e7daf34690c9f983f76e"
+									// src={this.state.songData.image}
 									alt="avatar"
 									style={{ width: '100%' }}
 								/>

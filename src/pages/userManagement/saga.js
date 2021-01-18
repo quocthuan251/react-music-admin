@@ -20,8 +20,8 @@ function* getDataUser() {
 }
 
 // Config API to call once or many
-function* userFlow() {
+function* usersFlow() {
 	yield takeEvery(GET_LIST_USERS, getDataUser);
 }
 
-export default userFlow;
+export default usersFlow;

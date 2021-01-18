@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, Tag, Avatar, Image, Button, Tooltip } from 'antd';
 import { Popconfirm, message } from 'antd';
 import { connect } from 'react-redux';
-import { FileSearchOutlined } from '@ant-design/icons';
+import { FileSearchOutlined, PlusOutlined } from '@ant-design/icons';
 import { getListSinger } from './action';
 import { Link } from 'react-router-dom';
 
@@ -27,14 +27,14 @@ class SingerManagement extends React.Component {
 		},
 		{
 			title: 'Avatar',
-			dataIndex: 'thumbnail',
+			dataIndex: 'image.imgLocation',
 			width: 150,
 			render: (thumbnail) => <Avatar src={<Image src={thumbnail} />} />,
 		},
 		{
 			title: 'Tên',
 			dataIndex: 'name',
-			width: 150,
+			width: 250,
 		},
 		{
 			title: 'Giới tính',
@@ -46,19 +46,19 @@ class SingerManagement extends React.Component {
 			dataIndex: 'nationality',
 			width: 150,
 		},
-		{
-			title: 'Trạng thái',
-			dataIndex: 'tags',
-			render: (tags) => (
-				<span>
-					{tags ? (
-						<Tag color={'green'}>{'true'}</Tag>
-					) : (
-						<Tag color={'volcano'}>{'false'}</Tag>
-					)}
-				</span>
-			),
-		},
+		// {
+		// 	title: 'Trạng thái',
+		// 	dataIndex: 'tags',
+		// 	render: (tags) => (
+		// 		<span>
+		// 			{tags ? (
+		// 				<Tag color={'green'}>{'true'}</Tag>
+		// 			) : (
+		// 				<Tag color={'volcano'}>{'false'}</Tag>
+		// 			)}
+		// 		</span>
+		// 	),
+		// },
 		{
 			title: 'Actions',
 			dataIndex: 'name',
@@ -114,7 +114,7 @@ class SingerManagement extends React.Component {
 		message.error('Hủy xóa');
 	};
 	render() {
-		const listSinger = this.props.dataSingers.data ?? [];
+		const listSinger = this.props.dataSingers ?? [];
 		return (
 			<>
 				<div
@@ -125,6 +125,17 @@ class SingerManagement extends React.Component {
 					}}
 				>
 					Quản lý danh sách nghệ sĩ
+				</div>
+				<div>
+					<Button
+						type="primary"
+						style={{ float: 'right', margin: '0rem 5rem 1rem' }}
+					>
+						<Link to={`/admin/singer-management/addSinger`}>
+							<PlusOutlined />
+							Thêm bài hát
+						</Link>
+					</Button>
 				</div>
 				<Table
 					columns={this.columns}
@@ -137,7 +148,7 @@ class SingerManagement extends React.Component {
 	}
 }
 const mapStateToProps = (state) => ({
-	dataSingers: state.reducerSinger.data,
+	dataSingers: state.reducerSinger.data.listResult,
 	loading: state.reducerSinger.loading,
 	error: state.reducerSinger.error,
 });
