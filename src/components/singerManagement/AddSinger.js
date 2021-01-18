@@ -1,8 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Form, Input, Switch, Button } from 'antd';
-import '../songManagement/style/SongEditStyle.css';
-// import '../songManagement/style/UploadImg.css';
+import './style/SingerEditStyle.css';
 import UploadImg from '../UploadImg';
 
 const layout = {

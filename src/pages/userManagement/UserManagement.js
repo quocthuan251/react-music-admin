@@ -3,6 +3,7 @@ import { Table, Tag, Image } from 'antd';
 import { Button, Tooltip } from 'antd';
 import { FileSearchOutlined, PlusOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
+import { deleteUser } from './service';
 import { getListUser } from './action';
 import { Link } from 'react-router-dom';
 import { Popconfirm, message } from 'antd';
@@ -10,16 +11,20 @@ import { Popconfirm, message } from 'antd';
 class UserManagement extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = { reload: null };
+		this.refreshPage = this.refreshPage.bind(this);
 	}
 	componentDidMount() {
 		this.props.getListUser();
 	}
 	confirm = (id) => {
-		console.log(id + ' id xoa');
+		deleteUser(id);
 		message.success('Xóa thành công');
+		this.refreshPage();
 	};
-
+	refreshPage = () => {
+		this.setState({ reload: true }, () => this.setState({ reload: false }));
+	};
 	cancel = (e) => {
 		console.log(e);
 		message.error('Hủy xóa');
@@ -154,7 +159,7 @@ class UserManagement extends React.Component {
 	}
 }
 const mapStateToProps = (state) => ({
-	dataUsers: state.reducerUser.data.listResult,
+	dataUsers: state.reducerUser.data,
 	loading: state.reducerUser.loading,
 	error: state.reducerUser.error,
 });

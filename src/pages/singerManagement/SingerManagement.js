@@ -3,7 +3,7 @@ import { Table, Tag, Avatar, Image, Button, Tooltip } from 'antd';
 import { Popconfirm, message } from 'antd';
 import { connect } from 'react-redux';
 import { FileSearchOutlined, PlusOutlined } from '@ant-design/icons';
-import { getListSinger } from './action';
+import { getListSingerManager } from './action';
 import { Link } from 'react-router-dom';
 
 class SingerManagement extends React.Component {
@@ -101,7 +101,7 @@ class SingerManagement extends React.Component {
 		},
 	];
 	componentDidMount() {
-		this.props.getListSinger();
+		this.props.getListSingerManager();
 	}
 
 	confirm = (name) => {
@@ -153,6 +153,6 @@ const mapStateToProps = (state) => ({
 	error: state.reducerSinger.error,
 });
 const mapDispatchToProps = {
-	getListSinger,
+	getListSingerManager,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SingerManagement);

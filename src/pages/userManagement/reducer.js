@@ -8,6 +8,7 @@ const initialState = {
 	data: [],
 	loading: false,
 	error: '',
+	
 };
 
 const reducerUser = (state = initialState, action) => {
@@ -16,7 +17,8 @@ const reducerUser = (state = initialState, action) => {
 			return { ...state, loading: true, error: '' };
 		}
 		case GET_LIST_USERS_SUCCESS: {
-			return { ...state, data: action.data, loading: false };
+			console.log(action.data.listResult);
+			return { ...state, data: action.data.listResult, loading: false };
 		}
 		case GET_LIST_USERS_FAIL: {
 			return { ...state, loading: false, error: action.error };
