@@ -41,7 +41,7 @@ class MainLayout extends React.Component {
 					<Menu
 						theme="dark"
 						mode="inline"
-						defaultSelectedKeys={['1']}
+						defaultSelectedKeys={['5']}
 					>
 						<div className="layout-logo-admin"></div>
 						<Menu.Item key="1" icon={<BarChartOutlined />}>
